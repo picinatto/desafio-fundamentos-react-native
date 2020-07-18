@@ -38,6 +38,7 @@ const CartProvider: React.FC = ({ children }) => {
 
   const addToCart = useCallback(async product => {
     console.log(product);
+    // TODO: Continuar aqui!!
   }, []);
 
   const increment = useCallback(async id => {
