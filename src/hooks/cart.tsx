@@ -38,20 +38,13 @@ const CartProvider: React.FC = ({ children }) => {
 
   const addToCart = useCallback(
     async product => {
-      console.log(`Product id: ${product.id}`);
-      let found = false;
-      products.map(productMap => {
-        if (productMap.id === product.id) {
-          productMap.quantity += 1;
-          found = true;
-          // TODO: Atualizar a lista..
-          console.log('Product found, added one to the qtt');
-        }
-      });
-
-      if (!found) {
-        console.log('Product not found, adding one');
-        setProducts([...products, product]);
+      const updateProduct = products.find(p => p.id === product.id);
+      if (updateProduct) {
+        updateProduct.quantity += 1;
+      } else {
+        const productToAdd = product;
+        productToAdd.quantity = 1;
+        setProducts([...products, productToAdd]);
       }
       await AsyncStorage.setItem(
         '@GoMarket:products',
