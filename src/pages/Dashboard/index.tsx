@@ -28,10 +28,6 @@ interface Product {
   price: number;
 }
 
-// Start the JSON server
-// yarn json-server server.json -p 3333
-// adb reverse tcp:3333 tcp:3333
-
 const Dashboard: React.FC = () => {
   const { addToCart } = useCart();
 
