@@ -41,13 +41,13 @@ const CartProvider: React.FC = ({ children }) => {
 
   const addToCart = useCallback(
     async product => {
-      const updateProduct = products.find(p => p.id === product.id);
-      if (updateProduct) {
-        updateProduct.quantity += 1;
+      const productExists = products.find(p => p.id === product.id);
+      if (productExists) {
+        products.map(p =>
+          p.id === product.id ? { ...product, quantity: p.quantity + 1 } : p,
+        );
       } else {
-        const productToAdd = product;
-        productToAdd.quantity = 1;
-        setProducts([...products, productToAdd]);
+        setProducts([...products, { ...product, quantity: 1 }]);
       }
       await AsyncStorage.setItem(
         '@GoMarket:products',
